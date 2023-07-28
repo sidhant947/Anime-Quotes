@@ -4,7 +4,7 @@ A new Flutter project to get Anime Quotes from API.
 
 ## Live-Demo
 
-sid-animequotes.netlify.app
+[Anime-Quotes](https://sid-animequotes.netlify.app/)
 
 ## Getting Started
 
