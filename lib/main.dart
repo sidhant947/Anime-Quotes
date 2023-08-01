@@ -1,4 +1,4 @@
-import 'package:apitest/Anime.dart';
+import '/Anime.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.dark(),
       home: Anime(),
     );
   }

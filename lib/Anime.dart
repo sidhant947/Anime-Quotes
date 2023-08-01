@@ -50,6 +50,13 @@ class _AnimeState extends State<Anime> {
       appBar: AppBar(
         title: Text("Anime Quotes"),
         centerTitle: true,
+        actions: [
+          IconButton(onPressed: (){
+            setState(() {
+              _getData();
+            });
+          }, icon: Icon(Icons.refresh_outlined))
+        ],
       ),
       body: _AnimeModel == null || _AnimeModel!.isEmpty
           ? const Center(
@@ -58,53 +65,60 @@ class _AnimeState extends State<Anime> {
           : ListView.builder(
               itemCount: _AnimeModel!.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 113, 142, 145),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              children: [
-                                Text(
-                                  _AnimeModel![index].quote.toString(),
-                                  style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 20),
-                                ),
-                                Text(
-                                  'by ' +
-                                      _AnimeModel![index].character.toString(),
-                                  style: TextStyle(
-                                      textBaseline: TextBaseline.alphabetic,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'from ' +
-                                      _AnimeModel![index].anime.toString(),
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ],
+                return GestureDetector(
+                  onPanEnd: (details) {
+                    setState(() {
+                      _getData();
+                    });
+                  },
+                  child: Column(
+                    children: [
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                // color: Color.fromARGB(255, 113, 142, 145),
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    _AnimeModel![index].quote.toString(),
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 20),
+                                  ),
+                                  Text(
+                                    'by ' +
+                                        _AnimeModel![index].character.toString(),
+                                    style: TextStyle(
+                                        textBaseline: TextBaseline.alphabetic,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    'from ' +
+                                        _AnimeModel![index].anime.toString(),
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    )
-                    // Text(_AnimeModel![index].quote.toString()),
-                    // Text(_AnimeModel![index].anime.toString()),
-                  ],
+                      )
+                      // Text(_AnimeModel![index].quote.toString()),
+                      // Text(_AnimeModel![index].anime.toString()),
+                    ],
+                  ),
                 );
               },
             ),
